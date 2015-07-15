@@ -13,7 +13,7 @@ data <- NEI[NEI$SCC %in% sources,]
 data <- NEI[NEI$fips %in% c("24510", "06037"),]
 data <- aggregate(Emissions ~ year + fips, data=data, sum)
 ## Creating the png file
-png("plot6.png",width=480,height=480,units="px",bg="transparent")
+png("plot6.png",width=540height=480,units="px",bg="transparent")
 ## Creating the plot
 library(ggplot2)
 ggpl <- qplot(year, Emissions, color=fips, data=data, geom="path",
