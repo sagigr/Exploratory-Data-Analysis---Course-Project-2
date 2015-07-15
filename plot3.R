@@ -12,7 +12,7 @@ baltimoreNEI<-subset(NEI, NEI$fips==24510)
 aggTotalsBaltimore <- aggregate(Emissions ~ year, baltimoreNEI,sum)
 ## Creating the png file
 png("plot3.png",width=480,height=480,units="px",bg="transparent")
-## Creating the plot
+## Creating the plot 3
 library(ggplot2)
 ggpl <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
   geom_bar(stat="identity") +
