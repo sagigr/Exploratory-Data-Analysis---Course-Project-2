@@ -6,3 +6,5 @@ if(!exists("NEI")){
 if(!exists("SCC")){
   SCC <- readRDS("./Source_Classification_Code.rds")
 }
+## Subsetting NEI data by Baltimore's fip
+baltimore<-subset(NEI, NEI$fips==24510)
