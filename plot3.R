@@ -10,11 +10,10 @@ if(!exists("SCC")){
 baltimoreNEI<-subset(NEI, NEI$fips==24510)
 ## Aggregating using sum the Baltimore emissions data by year
 aggTotalsBaltimore <- aggregate(Emissions ~ year, baltimoreNEI,sum)
-
+## Creating the png file
 png("plot3.png",width=480,height=480,units="px",bg="transparent")
-
+## Creating the plot
 library(ggplot2)
-
 ggpl <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
   geom_bar(stat="identity") +
   theme_bw() + guides(fill=FALSE)+
