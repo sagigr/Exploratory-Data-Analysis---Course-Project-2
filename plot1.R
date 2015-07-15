@@ -10,6 +10,6 @@ if(!exists("SCC")){
 totalNEI<-tapply(NEI$Emissions, INDEX=NEI$year, sum)
 barplot(totalNEI, main = expression('Total PM'[2.5]*' Emissions by Year'), xlab="Year", ylab="Emissions")
 ## Saving to file
-dev.copy(png, file="plot1.png", height=480, width=480, units="px", bg="transparent")
+dev.copy(png, file="plot1.png", height=480, width=480)
 
 dev.off()
