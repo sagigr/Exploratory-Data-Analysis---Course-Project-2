@@ -17,6 +17,7 @@ data2$city[data2$fips=="06037"]<-"LA"
 ## Creating the png file
 png("plot6.png", width=480, height=480)
 ## Creating the plot 6
+library("plyr")
 library("ggplot2")
 plotdata<-ddply(data2,.(year,city),summarize,sum=sum(Emissions))
 ggpl<-ggplot(plotdata,aes(year,sum))
