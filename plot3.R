@@ -8,7 +8,7 @@ if(!exists("SCC")){
 }
 ## Subsetting NEI data by Baltimore's fip
 baltimore<-subset(NEI, NEI$fips==24510)
-# Aggregate using sum the Baltimore emissions data by year
+# Aggregating using sum the Baltimore emissions data by year
 aggTotalsBaltimore <- aggregate(Emissions ~ year, baltimoreNEI,sum)
 
 png("plot3.png",width=480,height=480,units="px",bg="transparent")
