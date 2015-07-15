@@ -6,19 +6,22 @@ if(!exists("NEI")){
 if(!exists("SCC")){
   SCC <- readRDS("./Source_Classification_Code.rds")
 }
-##
-sources <- SCC[grepl("On-Road", SCC$EI.Sector),]
-sources <- sources$SCC
-data <- NEI[NEI$SCC %in% sources,]
-data <- NEI[NEI$fips %in% c("24510", "06037"),]
-data <- aggregate(Emissions ~ year + fips, data=data, sum)
+## Transforming data
+data<-transform(NEI,type=factor(type),year=factor(year))
+twocity<-data[data$fips=="24510"|data$fips=="06037",]
+vehicles<-as.data.frame(SCC[grep("vehicles",SCC$SCC.Level.Two,ignore.case=T),1])
+names(vehicles)<-"SCC"
+data2<-merge(vehicles,twocity,by="SCC")
+data2$city[data2$fips=="24510"]<-"Baltimore"
+data2$city[data2$fips=="06037"]<-"LA"
 ## Creating the png file
-png("plot6.png",width=640, height=480)
+png("plot6.png", width=480, height=480)
 ## Creating the plot 6
-library(ggplot2)
-ggpl <- qplot(year, Emissions, color=fips, data=data, geom="path",
-main="Emissions From Vehicle Related Sources in Baltimore and Los Angeles County", xlab="Year", ylab="Emissions")
-#ggsave(ggpl, file="plot6.png", width=10, height=5)
+library("ggplot2")
+plotdata<-ddply(data2,.(year,city),summarize,sum=sum(Emissions))
+ggpl<-ggplot(plotdata,aes(year,sum))
+ggpl+geom_point(aes(color=city),size=4)+labs(title="PM2.5 Emission from motor vehicle sources",
+ y="total PM2.5 emission each year")
 
 print(ggpl)
 
