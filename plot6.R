@@ -6,24 +6,33 @@ if(!exists("NEI")){
 if(!exists("SCC")){
   SCC <- readRDS("./Source_Classification_Code.rds")
 }
-## Transforming data
-data<-transform(NEI,type=factor(type),year=factor(year))
-twocity<-data[data$fips=="24510"|data$fips=="06037",]
-vehicles<-as.data.frame(SCC[grep("vehicles",SCC$SCC.Level.Two,ignore.case=T),1])
-names(vehicles)<-"SCC"
-data2<-merge(vehicles,twocity,by="SCC")
-data2$city[data2$fips=="24510"]<-"Baltimore"
-data2$city[data2$fips=="06037"]<-"LA"
-## Creating the png file
-png("plot6.png", width=480, height=480)
-## Creating the plot 6
-library("plyr")
-library("ggplot2")
-plotdata<-ddply(data2,.(year,city),summarize,sum=sum(Emissions))
-ggpl<-ggplot(plotdata,aes(year,sum))
-ggpl+geom_point(aes(color=city),size=4)+labs(title="PM2.5 Emission from motor vehicle sources",
- y="total PM2.5 emission each year")
 
-print(ggpl)
+NEI$year <- factor(NEI$year, levels = c('1999', '2002', '2005', '2008'))
+# Baltimore City, Maryland
+# Los Angeles County, California
+MD.onroad <- subset(NEI, fips == '24510' & type == 'ON-ROAD')
+CA.onroad <- subset(NEI, fips == '06037' & type == 'ON-ROAD')
+
+# Aggregates
+MD.DF <- aggregate(MD.onroad[, 'Emissions'], by = list(MD.onroad$year), sum)
+colnames(MD.DF) <- c('year', 'Emissions')
+MD.DF$City <- paste(rep('MD', 4))
+
+CA.DF <- aggregate(CA.onroad[, 'Emissions'], by = list(CA.onroad$year), sum)
+colnames(CA.DF) <- c('year', 'Emissions')
+CA.DF$City <- paste(rep('CA', 4))
+
+DF <- as.data.frame(rbind(MD.DF, CA.DF))
+## Creating the png file
+png("plot6.png",width=480,height=480)
+## Creating the plot 5
+library(ggplot2)
+ggplot(data = DF, aes(x = year, y = Emissions)) + 
+geom_bar(aes(fill = year),stat = "identity") + 
+guides(fill = F) + 
+ggtitle('Total Emissions of Motor Vehicle Sources\nLos Angeles County, California vs. Baltimore City, Maryland') + 
+ylab(expression('PM'[2.5])) + xlab('Year') + theme(legend.position = 'none') + 
+facet_grid(. ~ City) + 
+geom_text(aes(label = round(Emissions, 0), size = 1, hjust = 0.5, vjust = -1))
 
 dev.off()
