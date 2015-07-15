@@ -17,7 +17,7 @@ png("plot6.png",width=640, height=480)
 ## Creating the plot 6
 library(ggplot2)
 ggpl <- qplot(year, Emissions, color=fips, data=data, geom="path",
-main="Emissions From Vehicle Related Sources in Baltimore and Los Angeles County", xlab="Year", ylab="Emissions", fill=fips)
+main="Emissions From Vehicle Related Sources in Baltimore and Los Angeles County", xlab="Year", ylab="Emissions")
 #ggsave(ggpl, file="plot6.png", width=10, height=5)
 
 print(ggpl)
