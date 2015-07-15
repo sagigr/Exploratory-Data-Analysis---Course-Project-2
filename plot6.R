@@ -16,4 +16,4 @@ data <- NEI[NEI$fips %in% c("24510", "06037"),]
 data <- aggregate(Emissions ~ year + fips, data=data, sum)
 
 ggpl <- qplot(year, Emissions, color=fips, data=data, geom="path", main="Emissions From Vehicle Related Sources in Baltimore and Los Angeles County", xlab="Year", ylab="Emissions")
-ggsave(plot, file="plot6.png", width=10, height=5)
+ggsave(ggpl, file="plot6.png", width=10, height=5)
