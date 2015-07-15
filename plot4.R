@@ -13,8 +13,8 @@ coalCombustion <- (combustionRelated & coalRelated)
 combustionSCC <- SCC[coalCombustion,]$SCC
 combustionNEI <- NEI[NEI$SCC %in% combustionSCC,]
 ## Creating the png file
-png("plot4.png",width=480,height=480,units="px",bg="transparent")
-## Creating the plot
+png("plot4.png",width=480,height=480)
+## Creating the plot 4
 library(ggplot2)
 ggpl <- ggplot(combustionNEI,aes(factor(year),Emissions/10^5)) +
   geom_bar(stat="identity",fill="grey",width=0.75) +
