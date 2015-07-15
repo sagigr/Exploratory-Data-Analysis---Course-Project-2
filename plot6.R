@@ -13,8 +13,8 @@ data <- NEI[NEI$SCC %in% sources,]
 data <- NEI[NEI$fips %in% c("24510", "06037"),]
 data <- aggregate(Emissions ~ year + fips, data=data, sum)
 ## Creating the png file
-png("plot6.png",width=640, height=480,units="px",bg="transparent")
-## Creating the plot
+png("plot6.png",width=640, height=480)
+## Creating the plot 6
 library(ggplot2)
 ggpl <- qplot(year, Emissions, color=fips, data=data, geom="path",
 main="Emissions From Vehicle Related Sources in Baltimore and Los Angeles County", xlab="Year", ylab="Emissions")
