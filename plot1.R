@@ -6,7 +6,7 @@ if(!exists("NEI")){
 if(!exists("SCC")){
         SCC <- readRDS("./Source_Classification_Code.rds")
 }
-##  Creating the plot 1
+## Creating the Plot 1
 totalNEI<-tapply(NEI$Emissions, INDEX=NEI$year, sum)
 barplot(totalNEI, main = expression('Total PM'[2.5]*' Emissions by Year'), xlab="Year", ylab="Emissions")
 ## Saving to file
