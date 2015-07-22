@@ -1,10 +1,10 @@
 ## Reading the data
 ## This first line will likely take a few seconds. Be patient!
 if(!exists("NEI")){
-  NEI <- readRDS("./summarySCC_PM25.rds")
+        NEI <- readRDS("./summarySCC_PM25.rds")
 }
 if(!exists("SCC")){
-  SCC <- readRDS("./Source_Classification_Code.rds")
+        SCC <- readRDS("./Source_Classification_Code.rds")
 }
 ## Gathering the subset of the NEI data which corresponds to vehicles
 vehicles <- grepl("vehicle", SCC$SCC.Level.Two, ignore.case=TRUE)
