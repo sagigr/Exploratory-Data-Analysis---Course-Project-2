@@ -6,13 +6,13 @@ if(!exists("NEI")){
 if(!exists("SCC")){
         SCC <- readRDS("./Source_Classification_Code.rds")
 }
-## Subsetting NEI data by Baltimore's fip
-baltimoreNEI<-subset(NEI, NEI$fips==24510)
+## Subsetting the data by Baltimore City (BC)
+BCEmissions <-subset(NEI, fips==24510)
 ## Aggregating using sum the Baltimore emissions data by year
 aggTotalsBaltimore <- aggregate(Emissions ~ year, baltimoreNEI,sum)
 ## Creating the png file
 png("plot3.png",width=600, height=480)
-## Creating the plot 3
+## Creating the Plot 3
 library(ggplot2)
 ggpl <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
   geom_bar(stat="identity") +
@@ -22,5 +22,4 @@ ggpl <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
   labs(title=expression("PM"[2.5]*" Emissions, Baltimore City, MD 1999-2008 by Source Type"))
 
 print(ggpl)
-
 dev.off()
