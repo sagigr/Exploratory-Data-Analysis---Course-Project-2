@@ -6,12 +6,12 @@ if(!exists("NEI")){
 if(!exists("SCC")){
         SCC <- readRDS("./Source_Classification_Code.rds")
 }
-## Subsetting NEI data by Baltimore's fip
-baltimore <-subset(NEI, fips==24510)
-##Summing emissions per year
-totalBaltimore <-tapply(baltimore$Emissions, INDEX=baltimore$year, sum)
+## Subsetting the data by Baltimore City (BC)
+BCEmissions <-subset(NEI, fips==24510)
+##Summing emissions by year
+totalBCE <-tapply(BCEmissions$Emissions, INDEX=BCEmissions$year, sum)
 ## Creating the Plot 2
-barplot(totalBaltimore, main=expression('Total PM'[2.5]*' Emissions in Baltimore, MD by Year'), xlab="Year", ylab="Emissions (Tons)")
+barplot(totalBCE, main=expression('Total PM'[2.5]*' Emissions in Baltimore, MD by Year'), xlab="Year", ylab="Emissions (Tons)")
 ## Saving to file
 dev.copy(png, file="plot2.png", height=480, width=480)
 dev.off()
