@@ -2,6 +2,7 @@
 ## This first line will likely take a few seconds. Be patient!
 if(!exists("NEI")){
         NEI <- readRDS("./summarySCC_PM25.rds")
+        NEI$year <- factor(NEI$year, levels = c('1999', '2002', '2005', '2008'))
 }
 if(!exists("SCC")){
         SCC <- readRDS("./Source_Classification_Code.rds")
