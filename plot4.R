@@ -17,7 +17,7 @@ CCRSEY <- aggregate(Emissions ~ year, data=CCRSE, FUN=sum)
 png("plot4.png",width=640,height=520)
 ## Creating the Plot 4
 library(ggplot2)
-CoalEmissions <- ggplot(CCRSEY, aes(factor(year), Emissions)) + geom_bar(stat="identity") + theme_bw() + 
+CoalEmissions <- ggplot(CCRSEY, aes(factor(year), Emissions)) + geom_bar(stat="identity", fill="grey") + theme_bw() + 
 guides(fill=FALSE)+ labs(x="Year", y="Emissions (Tons)") + 
 labs(title="Emissions from Coal Combustion-Related Sources Across the United States, 1999–2008")
 print(CoalEmissions)
