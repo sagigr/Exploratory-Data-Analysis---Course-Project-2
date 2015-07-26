@@ -8,8 +8,8 @@ if(!exists("SCC")){
 }
 ## Subsetting the data by Baltimore City (BC)
 BCEmissions <-subset(NEI, fips==24510)
-## Aggregating using sum the Baltimore emissions data by year
-aggTotalsBaltimore <- aggregate(Emissions ~ year, baltimoreNEI,sum)
+## Summing Baltimore emissions by year
+SumBCEmissions <- aggregate(Emissions ~ year, BCEmissions,sum)
 ## Creating the png file
 png("plot3.png",width=600, height=480)
 ## Creating the Plot 3
@@ -20,6 +20,4 @@ ggpl <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
   facet_grid(.~type,scales = "free",space="free") + 
   labs(x="Year", y=expression("Total PM"[2.5]*" Emission (Tons)")) + 
   labs(title=expression("PM"[2.5]*" Emissions, Baltimore City, MD 1999-2008 by Source Type"))
-
-print(ggpl)
 dev.off()
