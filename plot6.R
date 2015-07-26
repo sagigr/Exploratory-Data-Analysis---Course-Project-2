@@ -7,15 +7,15 @@ if(!exists("SCC")){
         SCC <- readRDS("./Source_Classification_Code.rds")
 }
 ## Subsetting the data by Baltimore City (BC) and Los Angeles County (LAC) emissions from motor vehicle sources
-BCEmissions <-subset(NEI, fips==24510 & type=="ON-ROAD")
-LACEmissions <-subset(NEI, fips==06037 & type=="ON-ROAD")
+OnRoadEmissions <- subset(NEI, type == 'ON-ROAD')
+OnRoadEmissionsYears <- factor(OnRoadEmissionsYears, levels=c('1999', '2002', '2005', '2008'))
+BCEmissions <-subset(OnRoadEmissions, fips==24510)
+LACEmissions <-subset(OnRoadEmissions, fips==06037)
 
-data <- subset(NEI, type == 'ON-ROAD')
-data$year <- factor(data$year, levels=c('1999', '2002', '2005', '2008'))
-
-MD <- subset(data, fips == '24510')
-CA <- subset(data, fips == '06037')
-
+##data <- subset(NEI, type == 'ON-ROAD')
+##data$year <- factor(data$year, levels=c('1999', '2002', '2005', '2008'))
+##MD <- subset(data, fips == '24510')
+##CA <- subset(data, fips == '06037')
 MD <- aggregate(MD[, 'Emissions'], by=list(MD$year), sum)
 colnames(MD) <- c('year', 'Emissions')
 MD$City <- paste(rep('MD', 4))
