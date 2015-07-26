@@ -11,10 +11,10 @@ if(!exists("SCC")){
 BCEmissions <- subset(NEI, fips == 24510 & type == 'ON-ROAD')
 LACEmissions <- subset(NEI, fips == 06037 & type == 'ON-ROAD')
 ## Aggregating the Baltimore City (BC) and Los Angeles County (LAC) emissions from motor vehicle sources
-AggBCEmissions.DF <- aggregate(BCEmissions[, 'Emissions'], by = list(BCEmissions$year), FUN=sum)
+AggBCEmissions.DF <- aggregate(BCEmissions[, 'Emissions'], by = list(BCEmissions$year), sum)
 colnames(AggBCEmissions.DF) <- c('Year', 'Emissions')
 AggBCEmissions.DF$City <- paste(rep('Baltimore City', 4))
-AggLACEmissions.DF <- aggregate(LACEmissions[, 'Emissions'], by = list(LACEmissions$year), FUN=sum)
+AggLACEmissions.DF <- aggregate(LACEmissions[, 'Emissions'], by = list(LACEmissions$year), sum)
 colnames(AggLACEmissions.DF) <- c('Year', 'Emissions')
 AggLACEmissions.DF$City <- paste(rep('Los Angeles County', 4))
 BCLAC <- as.data.frame(rbind(AggBCEmissions.DF, AggLACEmissions.DF))
