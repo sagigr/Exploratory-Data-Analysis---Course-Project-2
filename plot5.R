@@ -14,11 +14,8 @@ AggBCEmisiions <- aggregate(Emissions ~ year, data=BCEmissions, FUN=sum)
 png("plot5.png",width=480,height=480)
 ## Creating the Plot 4
 library(ggplot2)
-VechicleEmissions <- ggplot(AggBCEmisiions, aes(factor(year), Emissions)) +
-    geom_bar(stat="identity") +
-    xlab("year") +
-    ylab(expression("total PM"[2.5]*" emissions")) +
-    ggtitle("Emissions from motor vehicle sources in Baltimore City")
-
-
+VechicleEmissions <- ggplot(AggBCEmisiions, aes(factor(year), Emissions)) + geom_bar(stat="identity", fill="grey") +
+theme_bw() + guides(fill=FALSE)+ labs(x="Year", y="Emissions (Tons)") +
+labs(title="Emissions from Motor Vehicle Sources in Baltimore City, MD, 1999–2008")
+print(VechicleEmissions)
 dev.off()
