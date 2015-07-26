@@ -1,9 +1,10 @@
-if (!(exists("NEI") && nrow(NEI) == 6497651)) { 
-  NEI <- readRDS("summarySCC_PM25.rds")
+## Reading the data
+## This first line will likely take a few seconds. Be patient!
+if(!exists("NEI")){
+        NEI <- readRDS("./summarySCC_PM25.rds")
 }
-
-if (!(exists("SCC") && nrow(SCC) == 11717)) { 
-  SCC <- readRDS("Source_Classification_Code.rds")
+if(!exists("SCC")){
+        SCC <- readRDS("./Source_Classification_Code.rds")
 }
 
 data <- subset(NEI, type == 'ON-ROAD')
