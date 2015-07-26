@@ -12,7 +12,7 @@ BCEmissions <-subset(NEI, fips==24510 & type=="ON-ROAD")
 AggBCEmisiions <- aggregate(Emissions ~ year, data=BCEmissions, FUN=sum)
 ## Creating the png file
 png("plot5.png",width=640,height=520)
-## Creating the Plot 4
+## Creating the Plot 5
 library(ggplot2)
 VechicleEmissions <- ggplot(AggBCEmisiions, aes(factor(year), Emissions)) + geom_bar(stat="identity", fill="grey") +
 theme_bw() + guides(fill=FALSE)+ labs(x="Year", y="Emissions (Tons)") +
