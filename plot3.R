@@ -8,8 +8,8 @@ if(!exists("SCC")){
 }
 ## Subsetting the data by Baltimore City (BC)
 BCEmissions <-subset(NEI, fips==24510)
-## Summing Baltimore emissions by year
-SumBCEmissions <- aggregate(Emissions ~ year, BCEmissions,sum)
+## Aggregating the Baltimore City (BC) emissions from motor vehicle sources by years
+AggBCEmisiions <- aggregate(Emissions ~ year, data=BCEmissions, FUN=sum)
 ## Creating the png file
 png("plot3.png",width=600, height=480)
 ## Creating the Plot 3
