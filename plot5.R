@@ -10,11 +10,10 @@ if(!exists("SCC")){
 BCEmissions <-subset(NEI, fips==24510 & type=="ON-ROAD")
 ## Aggregating the Baltimore City (BC) emissions from motor vehicle sources by years
 AggBCEmisiions <- aggregate(Emissions ~ year, data=BCEmissions, FUN=sum)
-
-
-# plot
+## Creating the png file
+png("plot5.png",width=480,height=480)
+## Creating the Plot 4
 library(ggplot2)
-png("plot5.png")
 ggplot(bmore.emissions.aggr, aes(x=factor(year), y=Emissions)) +
     geom_bar(stat="identity") +
     xlab("year") +
