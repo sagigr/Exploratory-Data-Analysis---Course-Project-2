@@ -8,10 +8,10 @@ if(!exists("SCC")){
 }
 ## Subsetting the data by Baltimore City (BC)
 BCEmissions <-subset(NEI, fips==24510)
-##Summing emissions by year
-totalBCE <-tapply(BCEmissions$Emissions, INDEX=BCEmissions$year, sum)
+## Summing Baltimore emissions by year
+SumBCEmissions <-tapply(BCEmissions$Emissions, INDEX=BCEmissions$year, sum)
 ## Creating the Plot 2
-barplot(totalBCE, main=expression('Total PM'[2.5]*' Emissions in Baltimore, MD by Year'), xlab="Year", ylab="Emissions (Tons)")
+barplot(SumBCEmissions, main=expression('Total PM'[2.5]*' Emissions in Baltimore City, MD by Year'), xlab="Year", ylab="Emissions (Tons)")
 ## Saving to file
 dev.copy(png, file="plot2.png", height=480, width=480)
 dev.off()
