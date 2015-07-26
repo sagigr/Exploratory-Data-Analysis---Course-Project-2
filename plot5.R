@@ -14,7 +14,7 @@ AggBCEmisiions <- aggregate(Emissions ~ year, data=BCEmissions, FUN=sum)
 png("plot5.png",width=480,height=480)
 ## Creating the Plot 4
 library(ggplot2)
-ggplot(bmore.emissions.aggr, aes(x=factor(year), y=Emissions)) +
+VechicleEmissions <- ggplot(AggBCEmisiions, aes(factor(year), Emissions)) +
     geom_bar(stat="identity") +
     xlab("year") +
     ylab(expression("total PM"[2.5]*" emissions")) +
