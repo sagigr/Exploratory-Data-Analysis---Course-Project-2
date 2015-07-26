@@ -6,22 +6,19 @@ if(!exists("NEI")){
 if(!exists("SCC")){
         SCC <- readRDS("./Source_Classification_Code.rds")
 }
-## Subsetting coal combustion-related NEI data
-combustionRelated <- grepl("comb", SCC$SCC.Level.One, ignore.case=TRUE)
-coalRelated <- grepl("coal", SCC$SCC.Level.Four, ignore.case=TRUE) 
-coalCombustion <- (combustionRelated & coalRelated)
-combustionSCC <- SCC[coalCombustion,]$SCC
-combustionNEI <- NEI[NEI$SCC %in% combustionSCC,]
+## Finding coal combustion-related sources (CCRS)
+isCCRS <- grepl("Fuel Comb.*Coal", SCC$EI.Sector)
+CCRS <- SCC[isCCRS,]
+## Finding emissions from coal combustion-related sources
+CCRSE <- NEI[(NEI$SCC %in% CCRS$SCC), ]
+## Groupping by years
+CCRSEY <- aggregate(Emissions ~ year, data=CCRSE, FUN=sum)
 ## Creating the png file
-png("plot4.png",width=480,height=480)
-## Creating the plot 4
+png("plot4.png",width=600,height=480)
+## Creating the Plot 4
 library(ggplot2)
-ggpl <- ggplot(combustionNEI,aes(factor(year),Emissions/10^5)) +
-  geom_bar(stat="identity",fill="grey",width=0.75) +
-  theme_bw() +  guides(fill=FALSE) +
-  labs(x="Year", y=expression("Total PM"[2.5]*" Emission (10^5 Tons)")) + 
-  labs(title=expression("PM"[2.5]*" Coal Combustion Source Emissions Across US from 1999-2008"))
-
-print(ggpl)
-
+CoalEmissions <- ggplot(CCRSEY/10^3, aes(x=factor(year), y=Emissions)) + 
+geom_bar(stat="identity") + xlab("Year") + ylab("Emissions (kTons)") + 
+ggtitle("Emissions from Coal Combustion-Related Sources Across the United States, 1999–2008")
+print(CoalEmissions)
 dev.off()
