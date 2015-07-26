@@ -9,7 +9,7 @@ if(!exists("SCC")){
 }
 ## Subsetting the data by Baltimore City (BC) and Los Angeles County (LAC) emissions from motor vehicle sources
 BCEmissions <- subset(NEI, fips == 24510 & type == 'ON-ROAD')
-LACEmissions <- subset(NEI, fips == 06037 & type == 'ON-ROAD')
+LACEmissions <- subset(NEI, fips == '06037' & type == 'ON-ROAD')
 ## Aggregating the Baltimore City (BC) and Los Angeles County (LAC) emissions from motor vehicle sources
 AggBCEmissions <- aggregate(BCEmissions[, 'Emissions'], by = list(BCEmissions$year), sum)
 colnames(AggBCEmissions) <- c('Year', 'Emissions')
