@@ -14,10 +14,10 @@ SumBCEmissions <- aggregate(Emissions ~ year, BCEmissions,sum)
 png("plot3.png",width=600, height=480)
 ## Creating the Plot 3
 library(ggplot2)
-ggpl <- ggplot(baltimoreNEI,aes(factor(year),Emissions,fill=type)) +
+TotalBCEmissions <- ggplot(BCEmissions, aes(factor(year),Emissions,fill=type)) +
   geom_bar(stat="identity") +
   theme_bw() + guides(fill=FALSE)+
   facet_grid(.~type,scales = "free",space="free") + 
-  labs(x="Year", y=expression("Total PM"[2.5]*" Emission (Tons)")) + 
-  labs(title=expression("PM"[2.5]*" Emissions, Baltimore City, MD 1999-2008 by Source Type"))
+  labs(x="Year", y="Emissions (Tons)") + 
+  labs(title=expression("Total PM"[2.5]*" Emissions, Baltimore City, MD 1999-2008"))
 dev.off()
